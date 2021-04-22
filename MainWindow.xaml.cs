@@ -24,5 +24,25 @@ namespace WPF_calculator
     {
       InitializeComponent();
     }
+
+    private void TapDigit(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void TapOperator(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void TapEqual(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void TapReset(object sender, RoutedEventArgs e)
+    {
+
+    }
   }
 }
