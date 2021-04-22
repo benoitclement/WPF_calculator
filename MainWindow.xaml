@@ -8,18 +8,18 @@
         Title="Calculator" Height="400" Width="300">
   <Grid Background="#707070">
     <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="1*"/>
+      <RowDefinition Height="3*"/>
     </Grid.RowDefinitions>
     <Grid Grid.Row="0" Background="#e1d0e4" >
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="1*"/>
+        <RowDefinition Height="2*"/>
       </Grid.RowDefinitions>
-      <TextBlock Grid.Row="0" Height="30" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 0" FontSize="20" x:Name="outputOperation">0</TextBlock>
-      <TextBlock Grid.Row="1" Height="70" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 4" FontSize="45" x:Name="output">0</TextBlock>
+      <TextBlock Grid.Row="0" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 0" FontSize="20" x:Name="fullInputOperation"></TextBlock>
+      <TextBlock Grid.Row="1" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 4" FontSize="45" x:Name="currentInput">0</TextBlock>
     </Grid>
-    <Grid Grid.Row="1" Height="275" Margin="5" >
+    <Grid Grid.Row="1" Margin="5" >
       <Grid.RowDefinitions>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
