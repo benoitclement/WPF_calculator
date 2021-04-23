@@ -24,7 +24,7 @@ namespace WPF_calculator
   public partial class MainWindow : Window
   {
     readonly string[] operators = { "+", "-", "*", "/" };
-    bool operationDone = true;
+    //bool displayResult = false;
     public MainWindow()
     {
       InitializeComponent();
@@ -47,9 +47,12 @@ namespace WPF_calculator
     {
       Button btn = sender as Button;
       string btnKey = btn.Content.ToString();
-      if (String.Equals(currentInput.Text, "0") && String.IsNullOrEmpty(fullInputOperation.Text))
+      
+      if ((String.Equals(currentInput.Text, "0") && String.IsNullOrEmpty(fullInputOperation.Text)) || fullInputOperation.Text.Contains("="))
       {
+        //displayResult = false;
         currentInput.Text = btnKey;
+        fullInputOperation.Text = "";
       } else if (operators.Contains(currentInput.Text)){
         fullInputOperation.Text += $"{currentInput.Text}"; // could surround with spaces for clarity if Evaluate() can handle
         currentInput.Text = btnKey;
@@ -61,7 +64,12 @@ namespace WPF_calculator
     {
       Button btn = sender as Button;
       string btnKey = btn.Content.ToString();
-      if (!String.IsNullOrEmpty(currentInput.Text))
+      if (fullInputOperation.Text.Contains("="))
+      {
+        fullInputOperation.Text = currentInput.Text;
+        currentInput.Text = btnKey;
+      }
+      else if (!String.IsNullOrEmpty(currentInput.Text))
       {
         fullInputOperation.Text += currentInput.Text;
         currentInput.Text = btnKey;
@@ -77,6 +85,8 @@ namespace WPF_calculator
           fullInputOperation.Text += currentInput.Text;
         }
         currentInput.Text = Math.Round(Evaluate(fullInputOperation.Text), 2).ToString();
+        fullInputOperation.Text += " = ";
+        //displayResult = true;
       }
     }
 
