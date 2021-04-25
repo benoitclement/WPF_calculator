@@ -23,7 +23,7 @@ namespace WPF_calculator
   /// </summary>
   public partial class MainWindow : Window
   {
-    readonly string[] operators = { "+", "-", "*", "/" };
+    readonly char[] operators = { '+', '-', '*', '/' };
     //bool displayResult = false;
     public MainWindow()
     {
@@ -53,8 +53,8 @@ namespace WPF_calculator
         //displayResult = false;
         currentInput.Text = btnKey;
         fullInputOperation.Text = "";
-      } else if (operators.Contains(currentInput.Text)){
-        fullInputOperation.Text += $"{currentInput.Text}"; // could surround with spaces for clarity if Evaluate() can handle
+      } else if (operators.Contains(currentInput.Text[^1])){ // if current input string contains operator there should only be one char (1st or last doesn't matter)
+        fullInputOperation.Text += $"{currentInput.Text}"; // could surround string with spaces for clarity if Evaluate() can handle
         currentInput.Text = btnKey;
       }
       else currentInput.Text += btnKey;
@@ -64,14 +64,17 @@ namespace WPF_calculator
     {
       Button btn = sender as Button;
       string btnKey = btn.Content.ToString();
-      if (fullInputOperation.Text.Contains("="))
+      string inputOp = fullInputOperation.Text;
+      char? last_char = null;
+      if (!String.IsNullOrEmpty(fullInputOperation.Text)) last_char = fullInputOperation.Text[^2];
+
+      if (last_char != null && last_char == '=')
       {
         fullInputOperation.Text = currentInput.Text;
         currentInput.Text = btnKey;
-      }
-      else if (!String.IsNullOrEmpty(currentInput.Text))
+      } else if (!String.IsNullOrEmpty(currentInput.Text))
       {
-        fullInputOperation.Text += currentInput.Text;
+        if(!operators.Contains(currentInput.Text[^1])) fullInputOperation.Text += currentInput.Text;
         currentInput.Text = btnKey;
       }
     }
@@ -80,7 +83,7 @@ namespace WPF_calculator
     {
       if (!String.IsNullOrEmpty(fullInputOperation.Text))
       {
-        if (!operators.Contains(currentInput.Text))
+        if (!operators.Contains(currentInput.Text[^1]))
         {
           fullInputOperation.Text += currentInput.Text;
         }
