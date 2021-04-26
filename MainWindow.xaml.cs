@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,18 +30,25 @@ namespace WPF_calculator
     {
       InitializeComponent();
     }
-    public static double Evaluate(string expression)
-    {
-      var xsltExpression = 
-            string.Format("number({0})", 
-                new Regex(@"([\+\-\*])").Replace(expression, " ${1} ")
-                                        .Replace("/", " div ")
-                                        .Replace("%", " mod "));
+    //public static double Evaluate(string expression)
+    //{
+    //  var xsltExpression = 
+    //        string.Format("number({0})", 
+    //            new Regex(@"([\+\-\*])").Replace(expression, " ${1} ")
+    //                                    .Replace("/", " div ")
+    //                                    .Replace("%", " mod "));
 
-        return (double)new XPathDocument
-            (new StringReader("<r/>"))
-                .CreateNavigator()
-                .Evaluate(xsltExpression);
+    //    return (double)new XPathDocument
+    //        (new StringReader("<r/>"))
+    //            .CreateNavigator()
+    //            .Evaluate(xsltExpression);
+    //}
+    public static Double Evaluate(string expression)
+    {
+      DataTable dt = new DataTable();
+      var eval = dt.Compute(expression, "").ToString();
+      return Math.Round(Convert.ToDouble(eval), 2);
+
     }
 
     private void TapDigit(object sender, RoutedEventArgs e)
@@ -87,7 +95,8 @@ namespace WPF_calculator
         {
           fullInputOperation.Text += currentInput.Text;
         }
-        currentInput.Text = Math.Round(Evaluate(fullInputOperation.Text), 2).ToString();
+        //currentInput.Text = Math.Round(Evaluate(fullInputOperation.Text, "")), 2);
+        currentInput.Text = Evaluate(fullInputOperation.Text).ToString();
         fullInputOperation.Text += " = ";
         //displayResult = true;
       }
