@@ -25,30 +25,16 @@ namespace WPF_calculator
   public partial class MainWindow : Window
   {
     readonly char[] operators = { '+', '-', '*', '/' };
-    //bool displayResult = false;
     public MainWindow()
     {
       InitializeComponent();
+      this.DataContext = new Calculator();
     }
-    //public static double Evaluate(string expression)
-    //{
-    //  var xsltExpression = 
-    //        string.Format("number({0})", 
-    //            new Regex(@"([\+\-\*])").Replace(expression, " ${1} ")
-    //                                    .Replace("/", " div ")
-    //                                    .Replace("%", " mod "));
-
-    //    return (double)new XPathDocument
-    //        (new StringReader("<r/>"))
-    //            .CreateNavigator()
-    //            .Evaluate(xsltExpression);
-    //}
     public static Double Evaluate(string expression)
     {
       DataTable dt = new DataTable();
       var eval = dt.Compute(expression, "").ToString();
       return Math.Round(Convert.ToDouble(eval), 2);
-
     }
 
     private void TapDigit(object sender, RoutedEventArgs e)
@@ -58,7 +44,6 @@ namespace WPF_calculator
       
       if ((String.Equals(currentInput.Text, "0") && String.IsNullOrEmpty(fullInputOperation.Text)) || fullInputOperation.Text.Contains("="))
       {
-        //displayResult = false;
         currentInput.Text = btnKey;
         fullInputOperation.Text = "";
       } else if (operators.Contains(currentInput.Text[^1])){ // if current input string contains operator there should only be one char (1st or last doesn't matter)
@@ -95,10 +80,8 @@ namespace WPF_calculator
         {
           fullInputOperation.Text += currentInput.Text;
         }
-        //currentInput.Text = Math.Round(Evaluate(fullInputOperation.Text, "")), 2);
         currentInput.Text = Evaluate(fullInputOperation.Text).ToString();
         fullInputOperation.Text += " = ";
-        //displayResult = true;
       }
     }
 
