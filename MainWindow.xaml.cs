@@ -28,67 +28,8 @@ namespace WPF_calculator
     public MainWindow()
     {
       InitializeComponent();
-      this.DataContext = new Calculator();
-    }
-    public static Double Evaluate(string expression)
-    {
-      DataTable dt = new DataTable();
-      var eval = dt.Compute(expression, "").ToString();
-      return Math.Round(Convert.ToDouble(eval), 2);
+      DataContext = new CalculatorVM();
     }
 
-    private void TapDigit(object sender, RoutedEventArgs e)
-    {
-      Button btn = sender as Button;
-      string btnKey = btn.Content.ToString();
-      
-      if ((String.Equals(currentInput.Text, "0") && String.IsNullOrEmpty(fullInputOperation.Text)) || fullInputOperation.Text.Contains("="))
-      {
-        currentInput.Text = btnKey;
-        fullInputOperation.Text = "";
-      } else if (operators.Contains(currentInput.Text[^1])){ // if current input string contains operator there should only be one char (1st or last doesn't matter)
-        fullInputOperation.Text += $"{currentInput.Text}"; // could surround string with spaces for clarity if Evaluate() can handle
-        currentInput.Text = btnKey;
-      }
-      else currentInput.Text += btnKey;
-    }
-
-    private void TapOperator(object sender, RoutedEventArgs e)
-    {
-      Button btn = sender as Button;
-      string btnKey = btn.Content.ToString();
-      string inputOp = fullInputOperation.Text;
-      char? last_char = null;
-      if (!String.IsNullOrEmpty(fullInputOperation.Text)) last_char = fullInputOperation.Text[^2];
-
-      if (last_char != null && last_char == '=')
-      {
-        fullInputOperation.Text = currentInput.Text;
-        currentInput.Text = btnKey;
-      } else if (!String.IsNullOrEmpty(currentInput.Text))
-      {
-        if(!operators.Contains(currentInput.Text[^1])) fullInputOperation.Text += currentInput.Text;
-        currentInput.Text = btnKey;
-      }
-    }
-
-    private void TapEqual(object sender, RoutedEventArgs e)
-    {
-      if (!String.IsNullOrEmpty(fullInputOperation.Text))
-      {
-        if (!operators.Contains(currentInput.Text[^1]))
-        {
-          fullInputOperation.Text += currentInput.Text;
-        }
-        currentInput.Text = Evaluate(fullInputOperation.Text).ToString();
-        fullInputOperation.Text += " = ";
-      }
-    }
-
-    private void TapReset(object sender, RoutedEventArgs e)
-    {
-      fullInputOperation.Text = "";
-      currentInput.Text = "0";
-    }
   }
 }

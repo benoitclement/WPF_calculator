@@ -16,8 +16,8 @@
         <RowDefinition Height="1*"/>
         <RowDefinition Height="2*"/>
       </Grid.RowDefinitions>
-      <TextBlock Grid.Row="0" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 0" FontSize="20" x:Name="fullInputOperation"></TextBlock>
-      <TextBlock Grid.Row="1" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 4" FontSize="45" Text="{Binding currentInput}" x:Name="currentInput" />
+      <TextBlock Grid.Row="0" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 0" FontSize="20" x:Name="fullInputOperation" Text="{Binding DisplayOperation}"/>
+      <TextBlock Grid.Row="1" TextAlignment="Right" VerticalAlignment="Bottom" Padding="0 0 10 4" FontSize="45" Text="{Binding DisplayInput}" x:Name="currentInput" />
     </Grid>
     <Grid Grid.Row="1" Margin="5" >
       <Grid.RowDefinitions>
@@ -33,24 +33,24 @@
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-      <Button x:Name="Reset" Click="TapReset" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FC5F6E" FontSize="30" FontWeight="Bold" >Reset</Button>
-      <Button x:Name="divide" Click="TapOperator" Grid.Row="0" Grid.Column="2" Background="#99F6CE" FontSize="30" FontWeight="Bold" >/</Button>
-      <Button x:Name="multiply" Click="TapOperator" Grid.Row="0" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >*</Button>
-      <Button x:Name="minus" Click="TapOperator" Grid.Row="1" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >-</Button>
-      <Button x:Name="plus" Click="TapOperator" Grid.Row="2" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >+</Button>
+      <Button x:Name="Reset" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FC5F6E" FontSize="30" FontWeight="Bold" >Reset</Button>
+      <Button x:Name="divide" Grid.Row="0" Grid.Column="2" Background="#99F6CE" FontSize="30" FontWeight="Bold" >/</Button>
+      <Button x:Name="multiply" Grid.Row="0" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >*</Button>
+      <Button x:Name="minus" Grid.Row="1" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >-</Button>
+      <Button x:Name="plus" Grid.Row="2" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >+</Button>
 
-      <Button x:Name="seven" Click="TapDigit" Grid.Row="1" Grid.Column="0" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=seven, Path=Content}">7</Button>
-      <Button x:Name="eight" Click="TapDigit" Grid.Row="1" Grid.Column="1" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=eight, Path=Content}">8</Button>
-      <Button x:Name="nine" Click="TapDigit" Grid.Row="1" Grid.Column="2" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=nine, Path=Content}">9</Button>
-      <Button x:Name="four" Click="TapDigit" Grid.Row="2" Grid.Column="0" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=four, Path=Content}">4</Button>
-      <Button x:Name="five" Click="TapDigit" Grid.Row="2" Grid.Column="1" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=five, Path=Content}">5</Button>
-      <Button x:Name="six" Click="TapDigit" Grid.Row="2" Grid.Column="2" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=six, Path=Content}">6</Button>
-      <Button x:Name="one" Click="TapDigit" Grid.Row="3" Grid.Column="0" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=one, Path=Content}">1</Button>
-      <Button x:Name="two" Click="TapDigit" Grid.Row="3" Grid.Column="1" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=two, Path=Content}">2</Button>
-      <Button x:Name="three" Click="TapDigit" Grid.Row="3" Grid.Column="2" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=three, Path=Content}">3</Button>
-      <Button x:Name="zero" Click="TapDigit" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigit}" CommandParameter="{Binding ElementName=zero, Path=Content}">0</Button>
+      <Button x:Name="seven" Grid.Row="1" Grid.Column="0" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=seven, Path=Content}">7</Button>
+      <Button x:Name="eight" Grid.Row="1" Grid.Column="1" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=eight, Path=Content}">8</Button>
+      <Button x:Name="nine" Grid.Row="1" Grid.Column="2" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=nine, Path=Content}">9</Button>
+      <Button x:Name="four" Grid.Row="2" Grid.Column="0" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=four, Path=Content}">4</Button>
+      <Button x:Name="five" Grid.Row="2" Grid.Column="1" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=five, Path=Content}">5</Button>
+      <Button x:Name="six" Grid.Row="2" Grid.Column="2" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=six, Path=Content}">6</Button>
+      <Button x:Name="one" Grid.Row="3" Grid.Column="0" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=one, Path=Content}">1</Button>
+      <Button x:Name="two" Grid.Row="3" Grid.Column="1" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=two, Path=Content}">2</Button>
+      <Button x:Name="three" Grid.Row="3" Grid.Column="2" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=three, Path=Content}">3</Button>
+      <Button x:Name="zero" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=zero, Path=Content}">0</Button>
 
-      <Button x:Name="equal" Click="TapEqual" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Background="#F6F6C1" FontSize="30" FontWeight="Bold" >=</Button>
+      <Button x:Name="equal" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Background="#F6F6C1" FontSize="30" FontWeight="Bold" >=</Button>
 
     </Grid>
   </Grid>
