@@ -33,11 +33,11 @@
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-      <Button x:Name="Reset" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FC5F6E" FontSize="30" FontWeight="Bold" >Reset</Button>
-      <Button x:Name="divide" Grid.Row="0" Grid.Column="2" Background="#99F6CE" FontSize="30" FontWeight="Bold" >/</Button>
-      <Button x:Name="multiply" Grid.Row="0" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >*</Button>
-      <Button x:Name="minus" Grid.Row="1" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >-</Button>
-      <Button x:Name="plus" Grid.Row="2" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" >+</Button>
+      <Button x:Name="Reset" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FC5F6E" FontSize="30" FontWeight="Bold" Command="{Binding InputResetCommand}">Reset</Button>
+      <Button x:Name="divide" Grid.Row="0" Grid.Column="2" Background="#99F6CE" FontSize="30" FontWeight="Bold" Command="{Binding InputOperatorCommand}" CommandParameter="{Binding ElementName=divide, Path=Content}">/</Button>
+      <Button x:Name="multiply" Grid.Row="0" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" Command="{Binding InputOperatorCommand}" CommandParameter="{Binding ElementName=multiply, Path=Content}">*</Button>
+      <Button x:Name="minus" Grid.Row="1" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" Command="{Binding InputOperatorCommand}" CommandParameter="{Binding ElementName=minus, Path=Content}">-</Button>
+      <Button x:Name="plus" Grid.Row="2" Grid.Column="3" Background="#99F6CE" FontSize="30" FontWeight="Bold" Command="{Binding InputOperatorCommand}" CommandParameter="{Binding ElementName=plus, Path=Content}">+</Button>
 
       <Button x:Name="seven" Grid.Row="1" Grid.Column="0" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=seven, Path=Content}">7</Button>
       <Button x:Name="eight" Grid.Row="1" Grid.Column="1" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=eight, Path=Content}">8</Button>
@@ -50,7 +50,7 @@
       <Button x:Name="three" Grid.Row="3" Grid.Column="2" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=three, Path=Content}">3</Button>
       <Button x:Name="zero" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Background="#B2F5F3" FontSize="30" FontWeight="Bold" Command="{Binding InputDigitCommand}" CommandParameter="{Binding ElementName=zero, Path=Content}">0</Button>
 
-      <Button x:Name="equal" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Background="#F6F6C1" FontSize="30" FontWeight="Bold" >=</Button>
+      <Button x:Name="equal" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Background="#F6F6C1" FontSize="30" FontWeight="Bold" Command="{Binding InputEqualCommand}">=</Button>
 
     </Grid>
   </Grid>

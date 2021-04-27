@@ -7,12 +7,12 @@ using System.Windows.Input;
 
 namespace WPF_calculator.ViewModels.Commands
 {
-  class InputDigitCommand : ICommand
+  class InputCommand : ICommand
   {
     public event EventHandler CanExecuteChanged;
-    private Action<string> _execute;
+    private Action _execute;
 
-    public InputDigitCommand(Action<string> execute)
+    public InputCommand(Action execute)
     {
       _execute = execute;
     }
@@ -23,7 +23,7 @@ namespace WPF_calculator.ViewModels.Commands
 
     public void Execute(object parameter)
     {
-      _execute.Invoke(parameter as string);
+      _execute.Invoke();
     }
   }
 }

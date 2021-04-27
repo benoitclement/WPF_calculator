@@ -11,23 +11,31 @@ using WPF_calculator.ViewModels.Commands;
 
 namespace WPF_calculator
 {
-  class CalculatorVM
+  class CalculatorVM : INotifyPropertyChanged
   {
-
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
     public string DisplayOperation { get; set; }
     public string DisplayInput { get; set; }
-    public InputDigitCommand InputDigitCommand { get; private set; }
+    public InputParamCommand InputDigitCommand { get; private set; }
+    public InputParamCommand InputOperatorCommand { get; private set; }
+    public InputCommand InputEqualCommand { get; private set; }
+    public InputCommand InputResetCommand { get; private set; }
     public CalculatorVM()
     {
-      DisplayOperation = "bonjour";
+      DisplayOperation = "";
       DisplayInput = "0";
-      InputDigitCommand = new InputDigitCommand(InputDigit);
-      //InputOperatorCommand;
-      //InputEqual;
-      //InputReset;
+      InputDigitCommand = new InputParamCommand(InputDigit);
+      InputOperatorCommand = new InputParamCommand(InputOperator);
+      InputEqualCommand = new InputCommand(InputEqual);
+      InputResetCommand = new InputCommand(InputReset);
     }
 
     readonly char[] operators = { '+', '-', '*', '/' };
+
+    public event PropertyChangedEventHandler PropertyChanged;
 
     public static Double Evaluate(string expression)
     {
@@ -47,6 +55,8 @@ namespace WPF_calculator
         DisplayInput = Key;
       }
       else DisplayInput += Key;
+      OnPropertyChanged("DisplayInput");
+      OnPropertyChanged("DisplayOperation");
     }
 
     private void InputOperator(string Key)
@@ -63,6 +73,8 @@ namespace WPF_calculator
         if (!operators.Contains(DisplayInput[^1])) DisplayOperation += DisplayInput;
         DisplayInput = Key;
       }
+      OnPropertyChanged("DisplayInput");
+      OnPropertyChanged("DisplayOperation");
     }
 
     private void InputEqual()
@@ -76,12 +88,16 @@ namespace WPF_calculator
         DisplayInput = Evaluate(DisplayOperation).ToString();
         DisplayOperation += " = ";
       }
+      OnPropertyChanged("DisplayInput");
+      OnPropertyChanged("DisplayOperation");
     }
 
     private void InputReset()
     {
       DisplayOperation = "";
       DisplayInput = "0";
+      OnPropertyChanged("DisplayInput");
+      OnPropertyChanged("DisplayOperation");
     }
 
   }
